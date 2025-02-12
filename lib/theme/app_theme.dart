@@ -7,8 +7,8 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: AppColors.lightPrimary,
-    cardColor: AppColors.lightPrimary,
     scaffoldBackgroundColor: AppColors.lightBackground,
+    cardColor: AppColors.lightSecondary, // Adjusted for proper contrast
     textTheme: TextTheme(
       displayLarge: AppTextStyles.heading1.copyWith(color: AppColors.lightText),
       displayMedium: AppTextStyles.heading2.copyWith(color: AppColors.lightText),
@@ -26,8 +26,8 @@ class AppTheme {
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: AppColors.darkPrimary,
-    cardColor: AppColors.lightSecondary,
     scaffoldBackgroundColor: AppColors.darkBackground,
+    cardColor: AppColors.darkSecondary, // Fixed to match dark mode properly
     textTheme: TextTheme(
       displayLarge: AppTextStyles.heading1.copyWith(color: AppColors.darkText),
       displayMedium: AppTextStyles.heading2.copyWith(color: AppColors.darkText),

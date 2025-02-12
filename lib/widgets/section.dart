@@ -38,7 +38,7 @@ class SectionContainer extends StatelessWidget {
               TextButton(
                 onPressed: onSeeAllPressed,
                 child: Text(
-                  "See All",
+                  "more".tr,
                   style: TextStyle(
                     fontSize: 14.sp,
                     color: Colors.blue,

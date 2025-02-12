@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:iqra/controller/theme_controller.dart';
+import 'package:iqra/utils/localization.dart';
 import 'package:iqra/widgets/section.dart';
 import 'package:iqra/widgets/section_book_card.dart';
 
@@ -18,7 +19,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
-
+  final List<Map<String, String>> languages = [
+    {'code': 'en', 'name': 'En', 'flag': '🇺🇸'}, // English with USA flag
+    {'code': 'bn', 'name': 'Bn', 'flag': '🇧🇩'}, // Bangla with BD flag
+  ];
   @override
   void initState() {
     super.initState();
@@ -49,14 +53,14 @@ class _HomeScreenState extends State<HomeScreen> {
     final ThemeController themeController = Get.find();
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: isDarkMode ? Colors.black : Colors.white, // White for light mode
+      backgroundColor: isDarkMode ? Color(0xFF121212) : Colors.white, // White for light mode
       body: Column(
         children: [
           // Custom AppBar inside the Body
           Container(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             decoration: BoxDecoration(
-              color: isDarkMode ? Colors.grey[900] : Colors.white, // AppBar background color
+              color: isDarkMode ? Color(0xFF202020) : Colors.white, // AppBar background color
               boxShadow: [
                 BoxShadow(
                   color: Colors.black12,
@@ -101,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               textAlignVertical: TextAlignVertical.center, // Ensures text is vertically centered
                               style: TextStyle(fontSize: 12.sp, color: Colors.black), // Text style
                               decoration: InputDecoration(
-                                hintText: "Search book",
+                                hintText: 'search_hint'.tr,
                                 hintStyle: TextStyle(fontSize: 12.sp, color: Colors.grey[600]),
                                 border: InputBorder.none,
                                 isCollapsed: true, // Ensures the text stays centered
@@ -240,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 child: Text(
-                                  "Join Now",
+                                  'join_btn'.tr,
                                   style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold, color: Colors.white),
                                 ),
                               ),
@@ -272,9 +276,62 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             }),
           ),
+          // Langueges change
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //Welcome
+                Text(
+                  'welcome'.tr,
+                  style: TextStyle(fontSize: 20, color: Colors.blue), // Styled text
+                ),
+                // Language Selection Dropdown
+                Container(
+                  width: 70.w,
+                  height: 30.h,
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.blueAccent, width: 0.5),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: Get.locale?.languageCode ?? 'en',
+                      onChanged: (String? newLang) {
+                        if (newLang != null) {
+                          LocalizationService.changeLocale(newLang);
+                        }
+                      },
+                      icon: Icon(Icons.arrow_drop_down_sharp, size: 16.sp, color: Colors.blueAccent), // 🔹 Custom dropdown icon
+                      dropdownColor: isDarkMode ? Color(0xFF202020): Colors.white, // 🔹 Background color of expanded dropdown
+                      borderRadius: BorderRadius.circular(10), // 🔹 Border radius for dropdown menu
+                      items: languages.map((lang) {
+                        return DropdownMenuItem<String>(
+                          value: lang['code'],
+                          child: Row(
+                            children: [
+                              Text(lang['flag']!, style: TextStyle(fontSize: 10.sp, )), // Flag
+                              SizedBox(width: 5),
+                              Text(
+                                lang['name']!,
+                                style: TextStyle(fontSize: 8.sp, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black,),
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
           //Most Populer
           SectionContainer(
-            title: "Most Popular",
+            title: 'most_popular'.tr,
             onSeeAllPressed: () {
               print("See All Clicked");
             },

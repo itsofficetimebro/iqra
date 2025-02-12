@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:iqra/utils/localization.dart';
 import 'controller/theme_controller.dart';
 import 'screens/home_screen.dart';
 import 'theme/app_theme.dart';
@@ -24,6 +25,9 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: themeController.isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
+          translations: LocalizationService(), // ✅ Set translations
+          locale: LocalizationService.locale, // ✅ Default locale
+          fallbackLocale: LocalizationService.fallbackLocale, // ✅ Fallback locale
           home: child,
         ));
       },

@@ -65,7 +65,7 @@ class _BookCardState extends State<BookCard> {
                     widget.imagePath, // Book image path
                     height: 150.h,
                     width: double.infinity,
-                    fit: BoxFit.fitHeight,
+                    fit: BoxFit.fitWidth,
                     errorBuilder: (context, error, stackTrace) {
                       // Show default image if the image fails to load
                       return Image.asset(
@@ -106,7 +106,7 @@ class _BookCardState extends State<BookCard> {
                   children: [
                     Text(
                       widget.isAudioBook ? "🎧" : "📚", // Show book type emoji
-                      style: theme.textTheme.bodyMedium,
+                      style: TextStyle(fontSize: 18.sp ,color: isDarkMode ? Colors.white : Colors.black,),
                     ),
                     SizedBox(width: 4.w),
                     Expanded(
